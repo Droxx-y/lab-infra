@@ -1,0 +1,27 @@
+# Ansible
+*.retry
+ansible/vault.yml
+ansible/*.vault
+!ansible/vault.yml.example
+
+# Secrets
+*.pem
+*.key
+*.crt
+id_rsa*
+id_ed25519*
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfvars
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/

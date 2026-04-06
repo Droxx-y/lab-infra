@@ -1,0 +1,44 @@
+---
+- name: Linux base setup
+  hosts: linux
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install base packages
+      apt:
+        name:
+          - htop
+          - curl
+          - vim
+          - fail2ban
+          - ufw
+          - net-tools
+          - unzip
+          - jq
+        state: present
+
+    - name: Enable and start fail2ban
+      systemd:
+        name: fail2ban
+        state: started
+        enabled: yes
+
+    - name: Configure UFW - allow ssh
+      ufw:
+        rule: allow
+        port: "22"
+        proto: tcp
+
+    - name: Configure UFW - allow internal network
+      ufw:
+        rule: allow
+        from_ip: 10.10.0.0/24
+
+    - name: Enable UFW
+      ufw:
+        state: enabled
+        policy: deny

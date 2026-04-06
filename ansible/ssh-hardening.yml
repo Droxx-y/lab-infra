@@ -1,0 +1,27 @@
+---
+- name: SSH hardening
+  hosts: linux
+  become: yes
+  tasks:
+    - name: Disable root login
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+
+    - name: Disable password auth
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+
+    - name: Disable KbdInteractive
+      lineinfile:
+       path: /etc/ssh/sshd_config
+       regexp: '^#?KbdInteractiveAuthentication'
+       line: 'KbdInteractiveAuthentication no'
+
+    - name: Restart sshd
+      systemd:
+       name: ssh
+       state: restarted

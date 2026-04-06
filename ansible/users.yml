@@ -1,0 +1,17 @@
+---
+- name: Manage users
+  hosts: linux
+  become: yes
+  tasks:
+    - name: Create local admin user
+      user:
+        name: localadmin
+        shell: /bin/bash
+        groups: sudo
+        state: present
+
+    - name: Add SSH key for localadmin
+      authorized_key:
+        user: localadmin
+        key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+        state: present

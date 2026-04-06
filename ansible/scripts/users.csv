@@ -1,0 +1,5 @@
+SamAccountName,Name,GivenName,Surname,Group
+svc-ansible,Ansible Service,Ansible,Service,Lab-Admins
+testuser,Test User,Test,User,Lab-Admins
+jaan.tamm,Jaan Tamm,Jaan,Tamm,Lab-Admins
+mari.mets,Mari Mets,Mari,Mets,Lab-Admins

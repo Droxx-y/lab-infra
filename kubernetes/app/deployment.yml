@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab-app
+  namespace: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lab-app
+  template:
+    metadata:
+      labels:
+        app: lab-app
+    spec:
+      containers:
+        - name: lab-app
+          image: lab-app:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5

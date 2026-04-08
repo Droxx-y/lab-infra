@@ -4,6 +4,10 @@ ansible/vault.yml
 ansible/*.vault
 !ansible/vault.yml.example
 
+## Kubernetes
+
+kubernetes/db/secret.yml
+
 # Secrets
 *.pem
 *.key

@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: lab-app
-          image: lab-app:v1
-          imagePullPolicy: Never
+          image: ghcr.io/droxx-y/lab-app:v1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           resources:

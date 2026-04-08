@@ -10,7 +10,7 @@ import (
 
 func main() {
     hostname, _ := os.Hostname()
-    version := "v2"
+    version := "v3"
     startTime := time.Now()
 
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

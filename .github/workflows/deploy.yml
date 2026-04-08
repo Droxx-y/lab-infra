@@ -33,3 +33,12 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:${{ github.sha }}
             ${{ env.IMAGE }}:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Deploy to production
+        run: |
+          sudo k3s kubectl set image deployment/lab-app lab-app=${{ env.IMAGE }}:${{ github.sha }} -n production
+          sudo k3s kubectl rollout status deployment/lab-app -n production --timeout=60s
